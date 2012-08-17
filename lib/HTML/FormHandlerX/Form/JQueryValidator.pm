@@ -14,10 +14,24 @@ HTML::FormHandlerX::Form::JQueryValidator - Perl extension for blah blah blah
 
 our $VERSION = '0.01';
 
+
+use JSON;
+use URI::Escape;
+
+
 =head1 SYNOPSIS
+
  use HTML::FormHandler::Moose;
 
  with HTML::FormHandlerX::Form::JQueryValidator;
+
+ ...
+
+ $form->to_jquery_validation_profile();
+
+ ....
+
+ <input type="hidden" id="validation_rules_escaped_json" value="[% form.as_escaped_json %]">
 
 =head1 DESCRIPTION
 
@@ -25,6 +39,35 @@ This perl role allows you to re-use some form validation rules with the
  JQuery Validation plugin (http://docs.jquery.com/Plugins/Validation)
 
 =cut
+
+=head1 METHODS
+
+=head2 to_jquery_validation_profile
+
+=cut
+
+sub to_jquery_validation_profile {
+    my $self = shift;
+
+    my $js_profile = { rules => {}, messages => {} };
+    foreach my $field ( @{$self->fields}) {
+        if ($field->required) {
+        $js_profile->{rules}{$field->id} = { required => 1  };
+            $js_profile->{messages}{$field->id} = $field->name . ' is required';
+        }
+    }
+    return $js_profile;
+}
+
+=head2 as_escaped_json
+
+=cut
+
+sub as_escaped_json {
+    my $self = shift;
+    my $js_profile = $self->to_jquery_validation;
+    return uri_escape_utf8(JSON->new->encode($js_profile)),
+}
 
 
 =head1 SEE ALSO
