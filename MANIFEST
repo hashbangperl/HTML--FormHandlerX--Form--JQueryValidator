@@ -1,0 +1,6 @@
+Changes
+Makefile.PL
+MANIFEST
+README
+t/01basic.t
+lib/HTML/FormHandlerX/Form/JQueryValidator.pm
