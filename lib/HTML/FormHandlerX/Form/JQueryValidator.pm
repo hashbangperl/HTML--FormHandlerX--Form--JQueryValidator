@@ -4,7 +4,7 @@ use warnings;
 
 =head1 NAME
 
-HTML::FormHandlerX::Form::JQueryValidator - Perl extension for blah blah blah
+HTML::FormHandlerX::Form::JQueryValidator - Perl trait for HTML::FormHandler and JQuery Validator
 
 =head1 VERSION
 
