@@ -18,6 +18,7 @@ our $VERSION = '0.01';
 use JSON;
 use URI::Escape;
 
+use Moose::Role;
 
 =head1 SYNOPSIS
 
@@ -31,7 +32,25 @@ use URI::Escape;
 
  ....
 
- <input type="hidden" id="validation_rules_escaped_json" value="[% form.as_escaped_json %]">
+    <input type="hidden" id="validation_json" value="[% form.as_escaped_json %]">
+
+    <script>
+    var validationJSON = JSON.parse(unescape($("#validation_json").val() ) );
+
+    $("#story_form").validate({
+                rules: validationJSON.rules,
+                   highlight: function(label) {
+                    $(label).closest('.control-group').addClass('error');
+                },
+                messages: validationJSON.messages,
+                success: function(label) {
+                    label
+                        .text('OK!').addClass('valid')
+                        .closest('.control-group').addClass('success');
+                }
+            });
+     });
+     </script>
 
 =head1 DESCRIPTION
 
@@ -43,6 +62,10 @@ This perl role allows you to re-use some form validation rules with the
 =head1 METHODS
 
 =head2 to_jquery_validation_profile
+
+Object method, takes no arguments.
+
+Returns as hashref holding a hash of rules and another of messages for the JQuery Validation plugin, based on the form fields of the object.
 
 =cut
 
@@ -61,16 +84,31 @@ sub to_jquery_validation_profile {
 
 =head2 as_escaped_json
 
+Object method, takes no arguments.
+
+Returns the jquery validation profile as a URI escaped json string, allowing it to be stashed
+in a hidden form field and extracted by javascript for use with JQuery Validation plugin
+
 =cut
 
 sub as_escaped_json {
     my $self = shift;
-    my $js_profile = $self->to_jquery_validation;
+    my $js_profile = $self->to_jquery_validation_profile;
     return uri_escape_utf8(JSON->new->encode($js_profile)),
 }
 
 
 =head1 SEE ALSO
+
+=over 4
+
+=item http://alittlecode.com/files/jQuery-Validate-Demo/
+
+=item http://docs.jquery.com/Plugins/Validation
+
+=item HTML::FormHandler
+
+=back
 
 =head1 AUTHOR
 
