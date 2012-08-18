@@ -74,10 +74,33 @@ sub to_jquery_validation_profile {
 
     my $js_profile = { rules => {}, messages => {} };
     foreach my $field ( @{$self->fields}) {
+        my $field_rule = { };
         if ($field->required) {
-        $js_profile->{rules}{$field->id} = { required => 1  };
+            $field_rule->{required} = 1;
             $js_profile->{messages}{$field->id} = $field->name . ' is required';
         }
+        if (lc($field->type) eq 'email') {
+            $field_rule->{email} = 1;
+        }
+        if (lc($field->type) eq 'hour') {
+            $field_rule->{range} = [0,23];
+        }
+        if (lc($field->type) eq 'minute' or lc($field->type) eq 'second' ) {
+            $field_rule->{range} = [0,59];
+        }
+        if (lc($field->type) eq 'hour') {
+            $field_rule->{range} = [0,23];
+        }
+        if (lc($field->type) eq 'month') {
+            $field_rule->{range} = [1,12];
+        }
+        if (lc($field->type) eq 'monthday') {
+            $field_rule->{range} = [1,31];
+        }
+        if (lc($field->type) =~ 'url') {
+            $field_rule->{url} = 1;
+        }
+        $js_profile->{rules}{$field->id} = $field_rule;
     }
     return $js_profile;
 }
