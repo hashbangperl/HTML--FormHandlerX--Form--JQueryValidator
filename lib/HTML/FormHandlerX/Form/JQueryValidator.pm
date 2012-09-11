@@ -8,11 +8,11 @@ HTML::FormHandlerX::Form::JQueryValidator - Perl trait for HTML::FormHandler and
 
 =head1 VERSION
 
-0.01
+0.02
 
 =cut
 
-our $VERSION = '0.01';
+our $VERSION = '0.02';
 
 
 use JSON;

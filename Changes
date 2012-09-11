@@ -1,4 +1,7 @@
 Revision history for Perl extension HTML::FormHandlerX::Form::JQueryValidator.
 
+0.02  Tue Sept 11
+        fix to bug [rt.cpan.org #79323] Undeclared dependency on JSON
+
 0.01  Fri Aug 17 20:35:33 2012
 	Initial Prototype
