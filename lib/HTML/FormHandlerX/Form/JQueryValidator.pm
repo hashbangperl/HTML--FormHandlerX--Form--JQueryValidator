@@ -77,7 +77,7 @@ sub to_jquery_validation_profile {
         my $field_rule = { };
         if ($field->required) {
             $field_rule->{required} = 1;
-            $js_profile->{messages}{$field->id} = $field->name . ' is required';
+            $js_profile->{messages}{$field->id} = $self->_localize($field->get_message('required'), $field->loc_label);
         }
         if (lc($field->type) eq 'email') {
             $field_rule->{email} = 1;
