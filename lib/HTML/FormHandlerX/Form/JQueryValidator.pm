@@ -8,11 +8,11 @@ HTML::FormHandlerX::Form::JQueryValidator - Perl trait for HTML::FormHandler and
 
 =head1 VERSION
 
-0.04
+0.05
 
 =cut
 
-our $VERSION = '0.04';
+our $VERSION = '0.05';
 
 
 use JSON;
@@ -130,6 +130,10 @@ sub as_escaped_json {
 =item http://docs.jquery.com/Plugins/Validation
 
 =item HTML::FormHandler
+
+=item Twitter Bootstrap
+
+=item examples/ dir in source code
 
 =back
 

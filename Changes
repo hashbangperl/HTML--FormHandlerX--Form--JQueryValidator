@@ -1,5 +1,8 @@
 Revision history for Perl extension HTML::FormHandlerX::Form::JQueryValidator.
 
+0.05  Thu Nov 15
+	Add missing files to MANIFEST
+
 0.04  Wed Nov 14
 	Replace unescape with decodeURIComponent
         Added unit tests
