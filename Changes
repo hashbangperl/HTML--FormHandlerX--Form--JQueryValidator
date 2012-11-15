@@ -1,5 +1,10 @@
 Revision history for Perl extension HTML::FormHandlerX::Form::JQueryValidator.
 
+0.04  Wed Nov 14
+	Replace unescape with decodeURIComponent
+        Added unit tests
+	Replace hardcoded required message with proper localised version from Form object
+
 0.03  Thu Sep 13
 	Fix to undeclared dependancy on URI (thanks cpan-testers!)
 

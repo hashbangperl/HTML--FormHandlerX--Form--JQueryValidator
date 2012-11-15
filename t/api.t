@@ -8,11 +8,10 @@ use My::Form::Story;
 
 my $form = My::Form::Story->new();
 
-
 my $expected_profile =  {
     'messages' => {
-        'ref_code' => 'ref_code is required',
-        'name' => 'name is required'
+        'ref_code' => 'Ref code field is required',
+        'name' => 'Name field is required'
     },
     'rules' => {
         'summary' => {},
@@ -27,6 +26,6 @@ my $expected_profile =  {
     }
 };
 
-is_deeply($expected_profile,$form->to_jquery_validation_profile());
+is_deeply($form->to_jquery_validation_profile(), $expected_profile);
 
 done_testing();
